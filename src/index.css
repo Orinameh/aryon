@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+  background-color: #f7f7f7;
+  display: grid;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.025rem;
+  overflow-x: hidden;
+}
+
+[data-error="true"] {
+  border: 1px solid #dd0000
+}
