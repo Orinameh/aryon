@@ -2,8 +2,8 @@ import { LoginSchemaType } from "@/pages/login";
 import { api } from "@/utils/api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import { useAuthContext } from "./useAuthContext";
 import { useMutation } from "@tanstack/react-query";
+import useAuthStore from "@/store/useAuthStore";
 
 const loginUser = async (data: LoginSchemaType) => {
     try {
@@ -16,7 +16,7 @@ const loginUser = async (data: LoginSchemaType) => {
   };
   export const useAuthHandlers = () => {
     const navigate = useNavigate();
-    const { dispatch } = useAuthContext();
+    const { login } = useAuthStore()
     const { mutate, isPending } = useMutation({
       mutationFn: loginUser,
       onSuccess: async (data) => {
@@ -25,7 +25,7 @@ const loginUser = async (data: LoginSchemaType) => {
         } else {
           toast.success("Login successful");
           localStorage.setItem("user", JSON.stringify(data));
-          dispatch({ type: "LOGIN", payload: data });
+          login();
           navigate("/recommendations");
         }
       },

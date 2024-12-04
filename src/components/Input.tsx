@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { HTMLProps } from "react";
 
 interface InputProps extends HTMLProps<HTMLInputElement> {
@@ -33,7 +34,10 @@ const Input = ({
           data-error={error}
           autoComplete="off"
           {...rest}
-          className={`w-full h-10 mt-1 border-slate-300 text-sm border rounded outline-none transition ps-4 ${customClass ?? ""}`}
+          className={cn(
+            `w-full h-10 mt-1 border-slate-300 text-sm border rounded outline-none transition ps-4`,
+            customClass
+          )}
         />
       </div>
       {error === "true" && (

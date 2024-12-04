@@ -1,17 +1,19 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { useAuthHandlers } from "@/hooks/useAuthHandlers";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { InferType, object, string } from "yup";
+import { z } from "zod";
 
-const LoginSchema = object({
-  username: string().required("Username is required").oneOf(["admin"]),
-  password: string().required("Password is required"),
+const LoginSchema = z.object({
+  username: z
+    .string({message: "Username cannot be empty"})
+    .min(1, "Username is required")
+    .refine((value) => value === "admin", "Invalid username. Must be admin"),
+  password: z.string({message: "Password cannot be empty"}).min(1, "Password is required"),
 });
 
-export type LoginSchemaType = InferType<typeof LoginSchema>;
-
+export type LoginSchemaType = z.infer<typeof LoginSchema>;
 
 const Login = () => {
   const { handleLogin, isPending } = useAuthHandlers();
@@ -20,12 +22,12 @@ const Login = () => {
     control,
     formState: { errors },
   } = useForm<LoginSchemaType>({
-    resolver: yupResolver(LoginSchema),
+    resolver: zodResolver(LoginSchema),
     mode: "onTouched",
     defaultValues: {
-      username: "",
-      password: "",
-    },
+      username: "" as "admin",
+      password: "" as string
+    }
   });
 
   const onSubmit = (data: LoginSchemaType) => {
@@ -45,7 +47,7 @@ const Login = () => {
                 id="username"
                 label="Username"
                 placeholder="Enter your username"
-                value={value.toLowerCase()}
+                value={value?.toLowerCase()}
                 onChange={onChange}
                 onBlur={onBlur}
                 error={`${!!errors.username?.message}`}
@@ -63,7 +65,7 @@ const Login = () => {
                 id="password"
                 label="Password"
                 placeholder="Enter your password"
-                value={value.toLowerCase()}
+                value={value?.toLowerCase()}
                 onChange={onChange}
                 onBlur={onBlur}
                 error={`${!!errors.password?.message}`}

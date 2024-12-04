@@ -79,7 +79,7 @@ export default function Recommendations() {
             name="search"
             value={search}
             placeholder="Search"
-            customClass="w-[300px] h-8"
+            customClass="w-[300px] h-8 mt-0"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setSearch(e.target.value)
             }
