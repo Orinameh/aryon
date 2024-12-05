@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import PrivateRoute from "./pages/auth/PrivateRoute";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
