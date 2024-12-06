@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <div className="max-w-lg mx-auto">
-      <p className="text-center mt-32 mb-12 text-2xl">Adryon Enterprise</p>
+      <p className="text-center mt-32 mb-12 text-2xl">Aryon Enterprise</p>
       <div className="bg-white py-6 px-10 rounded-lg relative  border shadow-md">
         <p className="text-center">Welcome back</p>
 
