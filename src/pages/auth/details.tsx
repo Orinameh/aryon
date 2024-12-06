@@ -22,7 +22,7 @@ export default function Details({
   recommendation: { [key: string]: any };
   fromArchive: boolean;
 }) {
-  const { handleArchive, isPending } = useHandlers();
+  const { handleArchive, isPending } = useHandlers(onClose);
   return (
     <div className="bg-white w-[500px] px-6 animate-modalSlideIn translate-x-[400px] h-full overflow-auto ml-auto">
       <div className="flex justify-between items-center">
@@ -38,7 +38,7 @@ export default function Details({
         </span>
       </div>
       <hr className="my-3" />
-      <p className="text-xs">{recommendation.description}</p>
+      <p className="text-xs">{recommendation?.description}</p>
       <div className="my-3 font-medium">
         <div className="flex items-center gap-1">
           <img src={box} alt="" className="w-4 h-4" />

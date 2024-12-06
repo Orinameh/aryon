@@ -20,9 +20,11 @@ const loginUser = async (data: LoginSchemaType) => {
     const { mutate, isPending } = useMutation({
       mutationFn: loginUser,
       onSuccess: async (data) => {
-        if (data.error) {
+        console.log(data)
+        if (data?.error) {
           return;
         } else {
+          console.log("Here")
           toast.success("Login successful");
           localStorage.setItem("user", JSON.stringify(data));
           login();

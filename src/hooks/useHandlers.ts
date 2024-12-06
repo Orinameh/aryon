@@ -1,10 +1,8 @@
 import { api } from "@/utils/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
 
-export const useHandlers = () => {
-    const navigate = useNavigate();
+export const useHandlers = (onClose: () => void) => {
     const queryClient = useQueryClient();
     const { mutate, isPending } = useMutation({
       mutationFn: async ({
@@ -28,11 +26,12 @@ export const useHandlers = () => {
         } else {
           queryClient.invalidateQueries();
           toast.success(`${type} successful`);
-          if (type === "archive") {
-            navigate("/archived");
-          } else {
-            navigate("/recommendations");
-          }
+          onClose();
+          // if (type === "archive") {
+          //   navigate("/archived");
+          // } else {
+          //   navigate("/recommendations");
+          // }
         }
       },
     });

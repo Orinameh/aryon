@@ -11,7 +11,11 @@ import { NavLink } from "react-router";
 
 const items = [
   { title: "Recommendations", url: "/recommendations" },
-  { title: "Archived", url: "/archived" },
+  { title: "Policies", url: "/policies" },
+  { title: "Events", url: "/events" },
+  { title: "Waivers", url: "/waivers" },
+
+
 ];
 export function AppSidebar() {
     const {logout} = useAuthStore()

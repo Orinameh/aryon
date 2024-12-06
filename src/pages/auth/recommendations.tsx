@@ -5,13 +5,15 @@ import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import box from "@/assets/box.svg";
 import Score from "@/components/Score";
 import { buildQuery } from "@/utils/util";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import Modal from "@/components/Modal";
 import Details from "./details";
 import cloud from "@/assets/cloud.svg";
 import aws from "@/assets/aws.svg";
 import azure from "@/assets/azure.svg";
+import bin from "@/assets/bin.svg";
+import { useNavigate } from "react-router";
 
 const useFetchRecommendations = (limit: string, search?: string) => {
   const {
@@ -55,21 +57,60 @@ export default function Recommendations() {
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const searchTerm = useDebounce(search);
+  const navigate = useNavigate()
   const [id, setId] = useState("");
   const { data, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } =
     useFetchRecommendations(limit, searchTerm);
 
-  const recommendations = data?.pages.flatMap((page) => page.data) || [];
+  const recommendations = data?.pages.flatMap((page) => page.data)|| [];
   const total = data?.pages?.[0].pagination.totalItems;
+
+  useEffect(() => {
+    function handleScrollEvent() {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (
+          hasNextPage ||
+          !isFetchingNextPage ||
+          recommendations.length !== total
+        ) {
+          fetchNextPage();
+        }
+      }
+    }
+
+    window.addEventListener("scroll", handleScrollEvent);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollEvent);
+    };
+  }, [
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    recommendations.length,
+    total,
+  ]);
+
   if (isLoading) return <Spinner />;
 
   const toDisplay = recommendations.find(
     (item) => item.recommendationId === id
   );
 
+  
   return (
     <>
-      <p className="font-semibold text-2xl">Recommendations</p>
+      <div className="flex justify-between items-center">
+        <p className="font-semibold text-2xl">Recommendations</p>
+        <span
+            className="text-xs inline-flex gap-1 cursor-pointer"
+            role="button"
+            onClick={() => navigate("/archived")}
+          >
+            <img src={bin} alt="bin" className="w-4 h-4" />
+            Archive
+          </span>
+      </div>
 
       <div className="flex justify-between items-center gap-10 mt-12">
         <div className="flex items-center gap-4 w-[400px]">
@@ -90,7 +131,7 @@ export default function Recommendations() {
         </div>
         {recommendations.length > 0 && (
           <span className="text-sm text-slate-400">
-            Showing {recommendations.length} of {total}
+            Showing {hasNextPage ? recommendations.length : total} of {total}
           </span>
         )}
       </div>
@@ -103,7 +144,7 @@ export default function Recommendations() {
               key={`${datum.recommendationId}-${index}`}
               role="button"
               tabIndex={1}
-              className="bg-white rounded-lg border border-slate-200 my-4 flex cursor-pointer"
+              className="bg-white rounded-lg border border-slate-200 my-4 flex cursor-pointer hover:shadow-md"
               onClick={() => {
                 setId(datum.recommendationId);
                 setShowModal(true);
@@ -152,16 +193,6 @@ export default function Recommendations() {
         <p>No recommendations available.</p>
       )}
 
-      <button
-        tabIndex={1}
-        onClick={() => fetchNextPage()}
-        disabled={
-          !hasNextPage || isFetchingNextPage || recommendations.length === total
-        }
-        className={`mx-auto flex cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 `}
-      >
-        {isFetchingNextPage ? "Loading more..." : "Load More"}
-      </button>
 
       <Modal isShown={showModal}>
         <Details

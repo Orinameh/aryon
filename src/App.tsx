@@ -29,6 +29,30 @@ const router = createBrowserRouter([
           return { Component: Archive.default };
         },
       },
+
+      {
+        path: "policies",
+        async lazy() {
+          const Policies = await import("./pages/auth/policies");
+          return { Component: Policies.default };
+        },
+      },
+
+      {
+        path: "events",
+        async lazy() {
+          const Event = await import("./pages/auth/events");
+          return { Component: Event.default };
+        },
+      },
+
+      {
+        path: "waivers",
+        async lazy() {
+          const Waivers = await import("./pages/auth/waivers");
+          return { Component: Waivers.default };
+        },
+      },
     ],
   },
 ]);

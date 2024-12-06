@@ -14,7 +14,7 @@ export default {
   			primary300: '#57f1e7',
   			primary400: '#25dcd5',
   			primary500: '#0cc0bc',
-  			modal: 'rgba(0, 0, 64, .7)',
+  			modal: 'rgba(0, 0, 0, .8)',
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',
   				foreground: 'hsl(var(--sidebar-foreground))',
