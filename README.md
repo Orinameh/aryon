@@ -19,3 +19,5 @@ yarn dev
 ```js
 yarn test
 ```
+
+- NB: The filtering feature wasn't implemented as at this time.
