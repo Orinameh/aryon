@@ -1,12 +1,7 @@
 import { AppSidebar } from "./app-sidebar";
 
 const Sidebar = () => {
-    
-  
-    
-    return (
-      <AppSidebar />
-    );
-  };
+  return <AppSidebar />;
+};
 
-  export default Sidebar;
+export default Sidebar;

@@ -19,6 +19,7 @@ const items = [
 ];
 export function AppSidebar() {
     const {logout} = useAuthStore()
+
   return (
     <Sidebar>
       <SidebarContent>

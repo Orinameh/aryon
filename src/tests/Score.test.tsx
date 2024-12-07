@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Score from './Score';
+import Score from '@/components/Score';
 
 describe('Score component', () => {
   it('renders correct number of full score bars', () => {

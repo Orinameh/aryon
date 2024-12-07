@@ -1,6 +1,6 @@
+import Login from "@/pages/login";
 import { render, screen } from "@testing-library/react";
 import { setupServer } from "msw/node";
-import Login from "./login";
 
 vi.mock("react-router", async (importOriginal) => {
   const actual = await importOriginal();

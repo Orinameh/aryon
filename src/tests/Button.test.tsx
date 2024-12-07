@@ -1,5 +1,5 @@
+import Button from '@/components/Button';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import Button from './Button';
 
 describe('Button component', () => {
   it('renders button with label', async () => {
@@ -7,9 +7,9 @@ describe('Button component', () => {
     await waitFor(() => expect(screen.getByTestId('button')).toHaveTextContent('Test Button'));
   });
 
-  it('renders spinner when loading', async () => {
+  it('renders Loading text', async () => {
     render(<Button label="Test Button" loading />);
-    await waitFor(() => expect(screen.getByTestId('spinner')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId('button')).toHaveTextContent('loading...'));
   });
 
   it('disables button when loading', async () => {

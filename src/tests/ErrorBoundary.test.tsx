@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { ErrorBoundary } from './ErrorBoundary'; // Adjust import path
+import { ErrorBoundary } from '@/components/ErrorBoundary'; // Adjust import path
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 
 // Mock react-router-dom
