@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import Spinner from "./Spinner";
 
 interface ButtonProps
   extends DetailedHTMLProps<
@@ -30,7 +29,7 @@ const Button = ({ label, loading, ...rest }: ButtonProps) => {
       disabled={loading}
       {...rest}
     >
-      {loading ? <Spinner /> : label}
+      {loading ? "loading..." : label}
     </button>
   );
 };
