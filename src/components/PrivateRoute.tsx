@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router";
 
 
-
 export default function PrivateRoute() {
   const { isAuthenticated } = useAuthStore()
   const navigate = useNavigate();
