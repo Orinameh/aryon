@@ -10,7 +10,7 @@ import useAuthStore from "@/store/useAuthStore";
 import { NavLink, useMatch } from "react-router";
 
 import DocIcon from "@/assets/doc";
-import StarIcon from "@/assets/Star";
+import StarIcon from "@/assets/star";
 import EventsIcon from "@/assets/events";
 import WaiverIcon from "@/assets/waiver";
 
