@@ -20,12 +20,12 @@ const Button = ({ label, loading, ...rest }: ButtonProps) => {
         text-sm
         text-white
         rounded
-        disabled: not-allowed 
         flex gap-1 
         items-center 
         justify-center 
         py-3 px-4 
-        disabled:bg-primary100`}
+        disabled:cursor-not-allowed
+        disabled:bg-primary500`}
       disabled={loading}
       {...rest}
     >
