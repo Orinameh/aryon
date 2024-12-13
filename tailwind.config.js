@@ -28,7 +28,7 @@ export default {
   		},
   		animation: {
   			fadeIn: 'fadeIn 0.1s linear both',
-  			modalSlideIn: 'modalSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) both'
+  			modalSlideIn: 'modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both'
   		},
   		keyframes: {
   			fadeIn: {
